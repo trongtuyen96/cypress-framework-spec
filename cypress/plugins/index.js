@@ -14,6 +14,12 @@
 
 const path = require('path');
 
+const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+
+const { lighthouse, pa11y, prepareAudit } = require('cypress-audit');
+
+const fs = require('fs');
+
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -21,7 +27,7 @@ const path = require('path');
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  / for cypress-mochawesome-reporter
+  // for cypress-mochawesome-reporter
   require('cypress-mochawesome-reporter/plugin')(on);
 
   // for cypress-terminal-report
@@ -36,6 +42,35 @@ module.exports = (on, config) => {
     }
   };
   require('cypress-terminal-report/src/installLogsPrinter')(on, options);
+
+  // for cypress-plugin-snapshots
+  initPlugin(on, config);
+
+  // for cypress-audit with lighthouse, pa11y
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    prepareAudit(launchOptions);
+  });
+
+  on('task', {
+    lighthouse: lighthouse((lighthouseReport) => {
+      let lighthouseReportString = JSON.stringify(lighthouseReport);
+      fs.writeFile('cypress/reports/lighthouse/report.json', lighthouseReportString, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("Lighthouse report is saved");
+      });
+    }),
+    pa11y: pa11y((pa11yReport) => {
+      let pa11yReportString = JSON.stringify(pa11yReport);
+      fs.writeFile('cypress/reports/pa11y/report.json', pa11yReportString, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("Pa11y report is saved");
+      });
+    })
+  });
 
   on('task', {
     setSecretKey(val) {
