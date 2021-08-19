@@ -23,3 +23,34 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+const runtime_vars_file = 'cypress/runtime_vars.json';
+
+Cypress.Commands.add('addRuntimeVariable', (key, value) => {
+
+    cy.readFile(runtime_vars_file).then((obj) => {
+        obj[key] = value;
+        // write the merged object
+        cy.writeFile(runtime_vars_file, obj);
+    })
+})
+
+Cypress.Commands.add('getRuntimeVariable', (key) => {
+    cy.readFile(runtime_vars_file).then((obj) => {
+        return obj[key];
+    })
+})
+
+Cypress.Commands.add('switchToIframe', (iframeSelector, ...elSelector) => {
+    return cy
+        .get(iframeSelector, { timeout: 10000 })
+        .should($iframe => {
+            // when passed multiple elSelector asserts each of them exists
+            for (let i = 0; i < elSelector.length; i++) {
+                expect($iframe.contents($iframe).find(elSelector[i] || 'body')).to.exist;
+            }
+        })
+        .then($iframe => {
+            return cy.wrap($iframe.contents().find('body'));
+        })
+})
