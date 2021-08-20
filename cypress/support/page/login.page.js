@@ -4,6 +4,7 @@ class LoginPage {
     EMAIL_INPUT = '//input[contains(@id,"emailInput")]';
     PASSWORD_INPUT = '//input[contains(@id,"passwordInput")]';
     LOGIN_BTN = '//button[contains(.,"Log In") and @data-testid = "buttonElement"]';
+    ERROR_MSG = ' //span[@data-testid="siteMembers.inlineErrorMsg"]';
 
     clickLoginLink() {
         cy.xpath(this.LOGIN_LINK).click();
@@ -49,6 +50,13 @@ class LoginPage {
             .click()
             .clear()
             .type(password);
+        return this;
+    }
+
+    verifyErrorMsg(errorMsg) {
+        cy.xpath(this.ERROR_MSG).invoke('text').should((error) => {
+            expect(error).to.equal(errorMsg);
+        })
         return this;
     }
 }
