@@ -1,4 +1,9 @@
 class HomePage {
+    LOGIN_BTN = '//button[.="Log In"]';
+    HOME_BTN = '//p[.="HOME"]';
+    FORUM_BTN = '//p[.="FORUM"]';
+    AUTHOR_BTN = '//p[.="AUTHOR"]';
+    USER_BTN = '//div[contains(@id,"defaultAvatar")]';
     CATE_ALL_BTN = '//a[.="ALL"]';
     CATE_PATTERNS_BTN = '//a[.="PATTERNS"]';
     CATE_TOOLS_BTN = '//a[.="TOOLS"]';
@@ -8,7 +13,8 @@ class HomePage {
     POST_TITLE_SEARCH = '//a[contains(@class,"blog-link-hover")]';
     POST_TITLE_LINK = '//div[contains(@class,"search-result")]//h2[contains(@class,"post-title blog-hover")]';
     BANNER_BG = '//div[@data-testid="container-bg"]';
-    POST_IMAGE_LOADED = '(//div[contains(@style,"file.webp")])[1]'
+    USER_NAME = '//button[contains(@aria-label,"account menu")]/div[position()=2]';
+    POST_IMAGE_LOADED = '(//div[contains(@style,"file.webp")])[1]';
 
     navigateHome() {
         cy.visit("/");
@@ -16,7 +22,32 @@ class HomePage {
         // cy.get('.some-element-in-your-app-that-only-exists-once-page-has-loaded', { timeout: 30000 })
 
         // Special case: Wait for page fully loaded and rendered
-        cy.xpath(this.POST_IMAGE_LOADED, {timeout: 30000});
+        cy.xpath(this.POST_IMAGE_LOADED, { timeout: 30000 });
+        return this;
+    }
+
+    clickLoginBtn() {
+        cy.xpath(this.LOGIN_BTN).click();
+        return this;
+    }
+
+    clickHomeBtn() {
+        cy.xpath(this.HOME_BTN).click();
+        return this;
+    }
+
+    clickForumBtn() {
+        cy.xpath(this.FORUM_BTN).click();
+        return this;
+    }
+
+    clickAuthorBtn() {
+        cy.xpath(this.AUTHOR_BTN).click();
+        return this;
+    }
+
+    clickUserBtn() {
+        cy.xpath(this.USER_BTN).click();
         return this;
     }
 
@@ -72,6 +103,16 @@ class HomePage {
 
     verifyBannerImage() {
         cy.xpath(this.BANNER_BG).toMatchSnapshot();
+        return this;
+    }
+
+    verifyLoginUser() {
+        cy.xpath(this.USER_NAME, { timeout: 10000 }).invoke('text')
+            .then((username) => {
+                cy.fixture('testdata.json').then((td) => {
+                    expect(username.trim()).to.equal(td.firstname + td.lastname);
+                })
+            })
         return this;
     }
 }

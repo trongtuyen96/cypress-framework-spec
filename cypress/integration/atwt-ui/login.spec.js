@@ -12,7 +12,6 @@ describe('Login feature test', () => {
     context('Login successfully', () => {
         it('Navigate to ATWT website and wait for page load', () => {
             homePage.navigateHome();
-            homePage.verifyLoginUser();
         })
 
         it('Login with valid email, password', () => {
@@ -25,14 +24,13 @@ describe('Login feature test', () => {
         })
 
         it('Login successfully', () => {
-            homepage.verifyLoginUser();
+            homePage.verifyLoginUser();
         })
     })
 
     context('Login failed', () => {
         it('Navigate to ATWT website and wait for page load', () => {
             homePage.navigateHome();
-            homePage.verifyLoginUser();
         })
 
         it('Login with invalid email, password', () => {
