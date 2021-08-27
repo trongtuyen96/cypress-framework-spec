@@ -2,7 +2,8 @@
     "baseUrl": "https://www.automatedtestingwithtuyen.com/",
     "env": {
         "email": "",
-        "password": ""
+        "password": "",
+        "apiUrl": "https://atwt-api.herokuapp.com/v1"
     },
     "defaultCommandTimeout": 20000,
     "reporter": "cypress-multi-reporters",
