@@ -12,7 +12,7 @@ var responseBody;
 class APIAction {
 
     getResponseBody(pos) {
-        return pos == undefined ? reponseBOdy : responseBody[pos];
+        return pos == undefined ? responseBody : responseBody[pos];
     }
 
     setHeader(headerName, headerValue) {
@@ -69,6 +69,7 @@ class APIAction {
         let response = responseBody;
         if (jsonkey.includes(".")) {
             jsonKey = jsonkey.split(".");
+            let count = 0;
             while (count < jsonKey.length) {
                 success = regex.test(response[jsonKey[count]]);
                 response = response[jsonKey[count]];
@@ -95,6 +96,7 @@ class APIAction {
         if (jsonkey.includes(".")) {
             jsonKey = jsonkey.split(".");
             let response = response[position];
+            let count = 0;
             while (count < jsonKey.length) {
                 success = regex.test(response[jsonKey[count]]);
                 response = response[jsonKey[count]];

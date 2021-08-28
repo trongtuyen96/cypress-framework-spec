@@ -4,11 +4,11 @@ const baseApiUrl = Cypress.env('apiUrl');
 const apiAction = new APIAction();
 
 describe('API User test', () => {
-    context('GET User', () => {
-        beforeEach(() => {
-            apiAction.setHeader('Content-Type', 'application/json');
-        })
+    before(() => {
+        apiAction.setHeader('Content-Type', 'application/json');
+    })
 
+    context('GET User', () => {
         it('Get user by name "Tuyen"', () => {
             apiAction.makeRequest('GET', baseApiUrl + '/user', '', { "name": "Tuyen" }).then(() => {
                 apiAction.validateResponseCode(200);
@@ -31,6 +31,7 @@ describe('API User test', () => {
             // Get user with id
             cy.getRuntimeVariable("get_user_id").then((userId) => {
                 apiAction.makeRequest('GET', baseApiUrl + '/user' + '/' + userId).then(() => {
+                    apiAction.validateResponseCode(200);
                     apiAction.validateReponseKeyValue('name', 'ATWT admin');
                     apiAction.validateReponseKeyValue('phoneNumber', '0123456789');
                     apiAction.validateReponseKeyValue('email', 'atwt@gmail.com');
