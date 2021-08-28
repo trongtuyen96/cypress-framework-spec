@@ -23,6 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import 'cypress-audit/commands';
 
 const runtime_vars_file = 'cypress/runtime_vars.json';
 

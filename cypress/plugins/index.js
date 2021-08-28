@@ -52,6 +52,7 @@ module.exports = (on, config) => {
   });
 
   on('task', {
+    // Lighthouse
     lighthouse: lighthouse((lighthouseReport) => {
       let lighthouseReportString = JSON.stringify(lighthouseReport);
       fs.writeFile('cypress/reports/lighthouse/report.json', lighthouseReportString, (err) => {
@@ -61,6 +62,8 @@ module.exports = (on, config) => {
         console.log("Lighthouse report is saved");
       });
     }),
+
+    // Pa11y
     pa11y: pa11y((pa11yReport) => {
       let pa11yReportString = JSON.stringify(pa11yReport);
       fs.writeFile('cypress/reports/pa11y/report.json', pa11yReportString, (err) => {
@@ -69,10 +72,8 @@ module.exports = (on, config) => {
         }
         console.log("Pa11y report is saved");
       });
-    })
-  });
+    }),
 
-  on('task', {
     setSecretKey(val) {
       return (secretKey = val);
     },
@@ -80,5 +81,5 @@ module.exports = (on, config) => {
     getSecretKey() {
       return secretKey;
     }
-  })
+  });
 }

@@ -1,0 +1,33 @@
+exports[`UI Regression test > Compare banner image of homepage #0`] = `
+<div class="qDqoW" data-testid="container-bg"></div>
+`;
+
+exports[`UI Regression test > Compare banner image of post "Overriding vs Overloading" #0`] = `
+<img
+  data-pin-url="https://www.automatedtestingwithtuyen.com/post/overriding-vs-overloading"
+  data-pin-media="https://static.wixstatic.com/media/850ae7_f6cdf44eec0a4375b79cb7a5ed9cb20c~mv2.png/v1/fit/w_805%2Ch_507%2Cal_c/file.png"
+  class="_5JW6l _36UM9"
+  src="https://static.wixstatic.com/media/850ae7_f6cdf44eec0a4375b79cb7a5ed9cb20c~mv2.png/v1/fill/w_740,h_466,al_c,q_95/850ae7_f6cdf44eec0a4375b79cb7a5ed9cb20c~mv2.webp"
+  style="opacity: 1;"
+/>
+`;
+
+exports[`UI Regression test > Compare banner image of post "SOLID" #0`] = `
+<img
+  data-pin-url="https://www.automatedtestingwithtuyen.com/post/s-o-l-i-d-the-first-5-principles-of-object-oriented-programing"
+  data-pin-media="https://static.wixstatic.com/media/850ae7_43463c0f4bfb4e45b2023a34af3cd04c~mv2.png/v1/fit/w_832%2Ch_522%2Cal_c/file.png"
+  class="_5JW6l _36UM9"
+  src="https://static.wixstatic.com/media/850ae7_43463c0f4bfb4e45b2023a34af3cd04c~mv2.png/v1/fill/w_740,h_464,al_c,q_95/850ae7_43463c0f4bfb4e45b2023a34af3cd04c~mv2.webp"
+  style="opacity: 1;"
+/>
+`;
+
+exports[`UI Regression test > Compare banner image of post "Java Reflection" #0`] = `
+<img
+  data-pin-url="https://www.automatedtestingwithtuyen.com/post/java-reflection"
+  data-pin-media="https://static.wixstatic.com/media/850ae7_1adcfe45e19248a5be95a8b5069ab219~mv2.png/v1/fit/w_830%2Ch_523%2Cal_c/file.png"
+  class="_5JW6l _36UM9"
+  src="https://static.wixstatic.com/media/850ae7_1adcfe45e19248a5be95a8b5069ab219~mv2.png/v1/fill/w_740,h_466,al_c,q_95/850ae7_1adcfe45e19248a5be95a8b5069ab219~mv2.webp"
+  style="opacity: 1;"
+/>
+`;

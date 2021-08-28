@@ -3,7 +3,22 @@
     "env": {
         "email": "",
         "password": "",
-        "apiUrl": "https://atwt-api.herokuapp.com/v1"
+        "apiUrl": "https://atwt-api.herokuapp.com/v1",
+        "cypress-plugin-snapshots": {
+            "imageConfig": {
+                "createDiffImage": true,
+                "threshold": 0.01,
+                "thresholdType": "percent"
+            },
+            "autoCleanUp": false,
+            "autopassNewSnapshots": true,
+            "diffLines": 3,
+            "excludeFields": [],
+            "ignoreExtraArrayItems": false,
+            "ignoreExtraFields": false,
+            "normalizeJson": true,
+            "prettier": true
+        }
     },
     "defaultCommandTimeout": 20000,
     "reporter": "cypress-multi-reporters",
@@ -25,5 +40,9 @@
             "timestamp": "mmddyyyy_HHMMss"
         }
     },
-    "video": false
+    "video": false,
+    "ignoreTestFiles": [
+        "**/__snapshots__/*",
+        "**/__image_snapshots__/*"
+    ]
 }
