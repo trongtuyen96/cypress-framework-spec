@@ -12,9 +12,9 @@ describe('API User test', () => {
         it('Get user by name "Tuyen"', () => {
             apiAction.makeRequest('GET', baseApiUrl + '/user', '', { "name": "Tuyen" }).then(() => {
                 apiAction.validateResponseCode(200);
-                apiAction.validateReponseKeyValueWithPos(0, "name", "Tuyen");
-                apiAction.validateReponseKeyValueWithPos(0, "phoneNumber", "0123456789");
-                apiAction.validateReponseKeyValueWithPos(0, "email", "trongtuyen96@gmail.com");
+                apiAction.validateReponseKeyValue("[0].name", "Tuyen");
+                apiAction.validateReponseKeyValue("[0].phoneNumber", "0123456789");
+                apiAction.validateReponseKeyValue("[0].email", "trongtuyen96@gmail.com");
             })
         })
 
@@ -22,10 +22,10 @@ describe('API User test', () => {
             // Get user
             apiAction.makeRequest('GET', baseApiUrl + '/user', { "name": "Tuyen" }).then(() => {
                 apiAction.validateResponseCode(200);
-                apiAction.validateReponseKeyValueWithPos(1, "phoneNumber", "0123456789");
+                apiAction.validateReponseKeyValue("[1].phoneNumber", "0123456789");
 
                 // Store id of second user
-                cy.addRuntimeVariable("get_user_id", apiAction.getResponseBody(1)["_id"]);
+                cy.addRuntimeVariable("get_user_id", apiAction.getResponseBodyValue("[1]._id"));
             })
 
             // Get user with id

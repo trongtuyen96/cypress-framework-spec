@@ -11,9 +11,9 @@ describe('API Car test', () => {
         it('Get car by model "Mc Laren 720S"', () => {
             apiAction.makeRequest('GET', baseApiUrl + '/car', '', { "model": "Mc Laren 720S" }).then(() => {
                 apiAction.validateResponseCode(200);
-                apiAction.validateReponseKeyValueWithPos(0, "type", "Hyper Car");
-                apiAction.validateReponseKeyValueWithPos(0, "color", "Barton Blue");
-                apiAction.validateReponseKeyValueWithPos(0, "speed", 320);
+                apiAction.validateReponseKeyValue("[0].type", "Hyper Car");
+                apiAction.validateReponseKeyValue("[0].color", "Barton Blue");
+                apiAction.validateReponseKeyValue("[0].speed", 320);
             })
         })
 
@@ -21,10 +21,10 @@ describe('API Car test', () => {
             // Get car
             apiAction.makeRequest('GET', baseApiUrl + '/car', { "model": "Lamborghini Aventador" }).then(() => {
                 apiAction.validateResponseCode(200);
-                apiAction.validateReponseKeyValueWithPos(1, "color", "Orange");
+                apiAction.validateReponseKeyValue("[1].color", "Orange");
 
                 // Store id of first car
-                cy.addRuntimeVariable("get_car_id", apiAction.getResponseBody(1)["_id"]);
+                cy.addRuntimeVariable("get_car_id", apiAction.getResponseBodyValue("[1]._id"));
             })
 
             // Get car with id
@@ -45,10 +45,10 @@ describe('API Car test', () => {
             // Get user for owner of car
             apiAction.makeRequest('GET', baseApiUrl + '/user', { "name": "Tuyen" }).then(() => {
                 apiAction.validateResponseCode(200);
-                apiAction.validateReponseKeyValueWithPos(1, "phoneNumber", "0123456789");
+                apiAction.validateReponseKeyValue("[1].phoneNumber", "0123456789");
 
                 // Store id of first user
-                cy.addRuntimeVariable("user_id_for_post_car", apiAction.getResponseBody(0)["_id"]);
+                cy.addRuntimeVariable("user_id_for_post_car", apiAction.getResponseBodyValue("[0]._id"));
             })
         })
 
@@ -68,7 +68,7 @@ describe('API Car test', () => {
                     apiAction.validateReponseKeyValue("speed", 330);
 
                     // Store id 
-                    cy.addRuntimeVariable("post_car_id", apiAction.getResponseBody()["_id"]);
+                    cy.addRuntimeVariable("post_car_id", apiAction.getResponseBodyValue("_id"));
                 })
             })
         })

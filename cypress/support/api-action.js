@@ -15,6 +15,34 @@ class APIAction {
         return pos == undefined ? responseBody : responseBody[pos];
     }
 
+    getResponseBodyValue(jsonkey) {
+        let jsonKey;
+        let response = responseBody;
+        if (jsonkey.includes(".")) {
+            jsonKey = jsonkey.split(".");
+            let count = 0;
+            while (count < jsonKey.length) {
+                if (jsonKey[count].includes("[")) {
+                    if (jsonKey[count].charAt(0) == "[") {
+                        response = response[parseInt(jsonKey[count].substring(1, jsonKey[count].indexOf("]")))];
+                    }
+                    else {
+                        response = response[jsonKey[count].substring(0, jsonKey[count].indexOf("["))];
+                        response = response[parseInt(jsonKey[count].substring(jsonKey[count].indexOf("["), jsonKey[count].indexOf("]")))];
+                    }
+                } else {
+                    response = response[jsonKey[count]];
+                }
+                count++;
+            }
+        }
+        else {
+            jsonKey = jsonkey;
+            response = response[jsonKey];
+        }
+        return response;
+    }
+
     setHeader(headerName, headerValue) {
         let valuesArray = [];
         if (headers[headerName]) {
@@ -27,6 +55,7 @@ class APIAction {
 
     setBasicAuth(username, password) {
         auth = { "username": username, "password": password }
+        return this;
     }
 
     setCookie(cookie) {
@@ -63,7 +92,6 @@ class APIAction {
 
     validateReponseKeyValue(jsonkey, value) {
         let jsonKey;
-        console.log(jsonkey, value);
         let regex = new RegExp(value);
         let success;
         let response = responseBody;
@@ -71,8 +99,18 @@ class APIAction {
             jsonKey = jsonkey.split(".");
             let count = 0;
             while (count < jsonKey.length) {
-                success = regex.test(response[jsonKey[count]]);
-                response = response[jsonKey[count]];
+                if (jsonKey[count].includes("[")) {
+                    if (jsonKey[count].charAt(0) == "[") {
+                        response = response[parseInt(jsonKey[count].substring(1, jsonKey[count].indexOf("]")))];
+                    }
+                    else {
+                        response = response[jsonKey[count].substring(0, jsonKey[count].indexOf("["))];
+                        response = response[parseInt(jsonKey[count].substring(jsonKey[count].indexOf("["), jsonKey[count].indexOf("]")))];
+                    }
+                } else {
+                    success = regex.test(response[jsonKey[count]]);
+                    response = response[jsonKey[count]];
+                }
                 count++;
             }
             cy.log("Expect " + jsonKey + " to equal " + value);
@@ -82,33 +120,6 @@ class APIAction {
             jsonKey = jsonkey;
             success = regex.test(response[jsonKey]);
             cy.log("Expect " + jsonKey + " to equal " + value);
-            expect(success).to.equal(true);
-        }
-        return this;
-    }
-
-    validateReponseKeyValueWithPos(position, jsonkey, value) {
-        let jsonKey;
-        console.log(jsonkey, value);
-        let regex = new RegExp(value);
-        let success;
-        let response = responseBody;
-        if (jsonkey.includes(".")) {
-            jsonKey = jsonkey.split(".");
-            let response = response[position];
-            let count = 0;
-            while (count < jsonKey.length) {
-                success = regex.test(response[jsonKey[count]]);
-                response = response[jsonKey[count]];
-                count++;
-            }
-            cy.log("Expect " + jsonKey + "of object " + position + " to equal " + value);
-            expect(success).to.equal(true);
-        }
-        else {
-            jsonKey = jsonkey;
-            success = regex.test(response[position][jsonKey]);
-            cy.log("Expect " + jsonKey + "of object " + position + " to equal " + value);
             expect(success).to.equal(true);
         }
         return this;
