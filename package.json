@@ -18,6 +18,7 @@
   "homepage": "https://github.com/trongtuyen96/cypress-framework-spec#readme",
   "devDependencies": {
     "@bahmutov/cy-api": "^1.5.0",
+    "ajv": "^8.6.2",
     "cypress": "^8.1.0",
     "cypress-audit": "^1.0.0",
     "cypress-mochawesome-reporter": "^2.2.1",

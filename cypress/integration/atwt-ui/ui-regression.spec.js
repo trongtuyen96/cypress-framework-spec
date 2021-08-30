@@ -9,12 +9,12 @@ describe('UI Regression test', () => {
         cy.xpath('//img[@style="opacity: 1;"]').toMatchSnapshot();
     })
 
-    it('Compare banner image of post "SOLID"', () => {
+    it.skip('Compare banner image of post "SOLID"', () => {
         cy.visit('post/s-o-l-i-d-the-first-5-principles-of-object-oriented-programing');
         cy.xpath('//img[@style="opacity: 1;"]').toMatchSnapshot();
     })
 
-    it('Compare banner image of post "Java Reflection"', () => {
+    it.skip('Compare banner image of post "Java Reflection"', () => {
         cy.visit('post/java-reflection');
         cy.xpath('//img[@style="opacity: 1;"]').toMatchSnapshot();
     })

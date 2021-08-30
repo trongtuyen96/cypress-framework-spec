@@ -2,12 +2,12 @@ const constants = require('../../support/constants');
 
 describe('Performance Test with Lighthouse and Pa11y', () => {
     context('With Lighthouse', () => {
-        it('Lighthouse test with default settings', () => {
+        it.skip('Lighthouse test with default settings', () => {
             cy.visit('https://github.com/trongtuyen96');
             cy.lighthouse();
         })
 
-        it('Lighthouse with custom threshold', () => {
+        it.skip('Lighthouse with custom threshold', () => {
             cy.visit('https://github.com/trongtuyen96');
             const customThresholds = {
                 performance: 50,
@@ -31,7 +31,7 @@ describe('Performance Test with Lighthouse and Pa11y', () => {
     })
 
     context('With Pa11y', () => {
-        it('Perform test', () => {
+        it.skip('Perform test', () => {
             cy.visit('https://github.com/trongtuyen96');
             cy.pa11y();
         })

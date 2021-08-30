@@ -24,8 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-audit/commands';
+import { validateSchema } from "./validate-schema-command";
 
-const runtime_vars_file = 'cypress/runtime_vars.json';
+const runtime_vars_file = 'cypress/runtime-vars.json';
 
 Cypress.Commands.add('addRuntimeVariable', (key, value) => {
 
@@ -55,3 +56,5 @@ Cypress.Commands.add('switchToIframe', (iframeSelector, ...elSelector) => {
             return cy.wrap($iframe.contents().find('body'));
         })
 })
+
+Cypress.Commands.add("validateSchema", validateSchema);

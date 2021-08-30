@@ -1,4 +1,6 @@
 import APIAction from "../../support/api-action";
+import { getUserSchema } from "../../support/schema/user/get-user.schema";
+import { getUserIdSchema } from "../../support/schema/user/get-user-id.schema";
 
 const baseApiUrl = Cypress.env('apiUrl');
 const apiAction = new APIAction();
@@ -15,6 +17,7 @@ describe('API User test', () => {
                 apiAction.validateReponseKeyValue("[0].name", "Tuyen");
                 apiAction.validateReponseKeyValue("[0].phoneNumber", "0123456789");
                 apiAction.validateReponseKeyValue("[0].email", "trongtuyen96@gmail.com");
+                cy.validateSchema(getUserSchema, apiAction.getResponseBody());
             })
         })
 
@@ -23,6 +26,7 @@ describe('API User test', () => {
             apiAction.makeRequest('GET', baseApiUrl + '/user', { "name": "Tuyen" }).then(() => {
                 apiAction.validateResponseCode(200);
                 apiAction.validateReponseKeyValue("[1].phoneNumber", "0123456789");
+                cy.validateSchema(getUserSchema, apiAction.getResponseBody());
 
                 // Store id of second user
                 cy.addRuntimeVariable("get_user_id", apiAction.getResponseBodyValue("[1]._id"));
@@ -35,6 +39,7 @@ describe('API User test', () => {
                     apiAction.validateReponseKeyValue('name', 'ATWT admin');
                     apiAction.validateReponseKeyValue('phoneNumber', '0123456789');
                     apiAction.validateReponseKeyValue('email', 'atwt@gmail.com');
+                    cy.validateSchema(getUserIdSchema, apiAction.getResponseBody());
                 })
             })
         })
