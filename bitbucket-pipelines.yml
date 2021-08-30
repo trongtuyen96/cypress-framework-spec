@@ -1,0 +1,44 @@
+image: cypress/browsers:node14.15.0-chrome86-ff82
+
+web-test: &web-test
+  name: "Web Test"
+  caches:
+    - cypress
+    - node
+  script:
+    - npx cypress run --browser chrome --spec "cypress/integration/atwt-ui/*.spec.js"
+    # - npx cypress run --browser chrome --record --parallel --group "Web-Test" --spec "cypress/integration/atwt-ui/*.spec.js" --ci-build-id $BITBUCKET_BUILD_NUMBER
+
+api-test: &api-test
+  name: "API Test"
+  caches:
+    - cypress
+    - node
+  script:
+    - npx cypress run --spec "cypress/integration/atwt-api/*.spec.js"
+    # - npx cypress run --record --parallel --group "API-Test" --spec "cypress/integration/atwt-api/*.spec.js" --ci-build-id $BITBUCKET_BUILD_NUMBER
+pipelines:
+  default:
+    - step:
+        name: Install dependencies
+        caches:
+          - cypress
+          - node
+        script:
+          - npm install
+        # artifacts:
+        #   - build/**
+    - parallel:
+        - step:
+            <<: *web-test
+        - step:
+            <<: *web-test
+        - step:
+            <<: *api-test
+        - step:
+            <<: *api-test
+       
+definitions:
+  caches:
+    yarn: $HOME/.cache
+    cypress: $HOME/.cache/Cypress

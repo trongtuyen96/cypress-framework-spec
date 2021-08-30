@@ -4,7 +4,16 @@
   "description": "An automated testing framework based on CypressIO - UI, API supported - No BDD",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:run": "npx cypress run --browser chrome",
+    "cypress:open": "npx cypress open",
+    "test-api-circleci": "npx cypress run --parallel --record --group ATWT-API-Test --ci-build-id $CIRCLE_BUILD_NUM --spec 'cypress/integration/atwt-api/*.spec.js'",
+    "test-web-circleci": "npx cypress run --parallel --record --group ATWT-WebUI-Test --ci-build-id $CIRCLE_BUILD_NUM --spec 'cypress/integration/atwt-ui/*.spec.js'",
+    "test-login": "npx cypress run --spec 'cypress/integration/atwt-ui/login.spec.js' --browser chrome",
+    "test-search": "npx cypress run --spec 'cypress/integration/atwt-ui/search.spec.js' --browser chrome",
+    "test-regression": "npx cypress run --spec 'cypress/integration/atwt-ui/ui-regression.spec.js' --browser chrome",
+    "test-api-user": "npx cypress run --spec 'cypress/integration/atwt-api/api-user.spec.js'",
+    "test-api-car": "npx cypress run --spec 'cypress/integration/atwt-api/api-car.spec.js'"
   },
   "repository": {
     "type": "git",
