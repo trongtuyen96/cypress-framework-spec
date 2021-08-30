@@ -1,0 +1,95 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Cypress Tests
+
+on: 
+  push:
+    branches-ignore:
+      - "renovate/**"
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     # run copies of the current job in parallel - 2 Machines
+    #     containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: ls -la
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          # record: true
+          # parallel: true
+          # group: API-Test
+          spec:
+            cypress/integration/atwt-api/*.spec.js
+        env:
+          # # pass the Dashboard record key as an environment variable
+          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload failure screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-reports
+          path: cypress/reports
+
+  web-test:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: ls -la
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          # record: true
+          browser: chrome
+          spec:
+            cypress/integration/atwt-ui/*.spec.js
+        env:
+          # # pass the Dashboard record key as an environment variable
+          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload failure screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-reports
+          path: cypress/reports
+  
+  
