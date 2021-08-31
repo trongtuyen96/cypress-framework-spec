@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a><img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/ce94a0a9652fead7594800448ae5b147471bc1cc/covers/ATWT_background.PNG" alt="background"></a>
+  <a><img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/ATWT_background.PNG"></a>
   <a><img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9aefd091a901c81ffff7ec93213e83fc83c80ba8/covers/badge.png" alt="badge" width="800px"></a>
 </h1>
 
@@ -44,8 +44,13 @@
 
 ## Changelogs
 
+.....
+
 :star: 28/08/2021 : Update the comparing key value of API test (which not correct if return a array of object)
+
 :star: 30/08/2021 : Add schema validator with ajv
+
+:star: 31/08/2021 : CI test with Github Actions, CircleCI, Travis CI, Bitbucket Pipeleines, Gitlab Pipelines
 
 ## Features
 
@@ -61,7 +66,9 @@
 
 :gear: Visual regression testing supported
 
-:gear: Page Object Model with Cucumber BDD
+:gear: Page Object Model
+
+:gear: Schema Validator with ajv
 
 :gear: Parallel runs with CI provider
 
@@ -107,58 +114,79 @@ Use npm to install the dependencies
 #### Run a specific feature file
 
 ```bash
-    npx cypress run --spec cypress/integration/{featurefile.feature}
+    npx cypress run --spec cypress/integration/{spec.js file}
 ```
 
 #### Run multiple feature files
 
 ```bash
-    npx cypress run --spec "cypress/integration/webtest/*.feature"  --browser chrome
+    npx cypress run --spec "cypress/integration/atwt-api/*.spec.js"  --browser chrome
 ```
 
 More details: https://docs.cypress.io/guides/guides/command-line
 
 ## Write test
 
-#### Write BBD Test Case
+#### Write UI Test Case
 
-- Head to cypress/integration and create new .feature file
-- Specify the steps with BDD keywords (Feature, Scenario, Given, When, And, Then, ...)
-
-<p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/9203c494a88fc47cede2c089d2f6519a78f1d859/covers/write_test_1.png" width="500px">
-</p>
-
-<p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/9203c494a88fc47cede2c089d2f6519a78f1d859/covers/write_test_2.png" width="500px">
-</p>
-
-#### Add locator file for pages in test
-
-- Head to cypress/support/locators and create new .locators.js file
-- Define locators and export those elements
-
-<p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/9203c494a88fc47cede2c089d2f6519a78f1d859/covers/write_test_3.png" width="500px">
-</p>
-
-#### Add page files with methods
+###### Add page file with locators and methods
 
 - Head to cypress/support/pages and create new .page.js file
-- Call the locators of pages by require(<path to locator file>)
+- List all locators of elements in the page
 - Write methods that supports your test validations/actions
+- Export the page object
 	
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/329b19a81ad59e629dce8003de63d469a1b7a782/covers/write_test_4.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_1.png" width="500px">
 </p>
 	
-#### Define steps for each feature
+###### Add new test spec file and write test
 	
-- Head to cypress/support/step_definitions and create new .steps.js file
-- Write test steps with methods defined in .pages.js file
+- Head to cypress/integration/atwt-ui and create new .spec.js file
+- Import the created page object that including the functions/validators you want to use
+- "describe" tag for test suite
+- "context" tag for group of test cases by condition
+- "it" tag for test case
+- Initialize page object and call methods/validators for testing purpose
 	
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/329b19a81ad59e629dce8003de63d469a1b7a782/covers/write_test_5.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_2.png" width="500px">
+</p>
+
+#### Write API Test Case
+
+###### Add new test spec file and write test
+
+- Head to cypress/integration/atwt-api and create new .spec.js file
+- Import the api-action
+- "describe" tag for test suite
+- "context" tag for group of test cases by condition
+- "it" tag for test case
+- Some bilt-in functions: makeRequest(), validateResponseKeyValue(), getResponseBodyValue(), setHeader(), ...
+
+<p align="center">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_3.png" width="500px">
+</p>
+
+###### Validate resposne schema
+
+- Create new schema file inside support/schema as following
+
+<p align="center">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_4.png" width="500px">
+</p>
+
+- Import the schema configuration in your test spec.js file
+- Call cy.validateSchema(<your schema>, apiAction.getResponseBody()) to validate schema of response 
+
+###### Store run-time parameters
+
+- Store the run-time parameter by adding key and value: cy.addRuntimeVariable(<key name>, <value>)
+- Get the stored parameter by cy.getRuntimeVariable(<key name>)
+- Remmeber to .then() since Cypress command is asynchonous
+
+<p align="center">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_5.png" width="500px">
 </p>
 	
 ## Set Up
@@ -187,7 +215,7 @@ More details: https://docs.cypress.io/guides/guides/command-line
         - "timestamp" to append timestamp to report name, prevent replacement
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/329b19a81ad59e629dce8003de63d469a1b7a782/covers/reports.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/reports.png" width="500px">
 </p>
 	
 4. After executions, reports are located in cypress/reports
@@ -220,7 +248,7 @@ More details: https://docs.cypress.io/guides/guides/command-line
 ```
 5. Config the settings
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/025be01e7befa40b673feeabed466c3cf3d3ea13/covers/snapshots.png" width="300px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/snapshots.png" width="300px">
 </p>
 
 6. Take snapshot
@@ -253,53 +281,64 @@ More details: https://docs.cypress.io/guides/guides/command-line
 4. Use cy.lighthouse() or cy.pa11y() to run performance testing
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/blob/329b19a81ad59e629dce8003de63d469a1b7a782/covers/performance.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/performance.png" width="500px">
 </p>
 
 5. After executions, reports are located in cypress/reports
 
-### BDD Test Cases with Cucumber
+### Schema Validator with ajv
 	
-1. Install cypress-cucumber-preprocessor
+1. Install ajv
 ```bash
-    npm install --save-dev cypress-cucumber-preprocessor
+    npm install --save-dev ajv
 ```
-2. Set up processor in /plugin/index.js
+2. Add new command vlidateSchema in /support/validate-schema-command.js
 ```bash
-    const cucumber = require('cypress-cucumber-preprocessor').default
+    export const validateSchema = (schema, response) => {
+      const ajv = new Ajv();
+      const validate = ajv.compile(schema);
+      const valid = validate(response);
 
-    module.exports = (on, config) => {
-        on('file:preprocessor', cucumber())
-    }
+      if (!valid) {
+        getSchemaError(validate.errors).then((schemaError) => {
+          throw new Error(schemaError);
+        });
+      } else {
+        cy.log("Schema validated!");
+      }
+    };
 ```
-3. Add config for test files in cypress.json
+3. Add the defined command in support/commands.js of Cypress
 ```bash
-    {
-    "testFiles": "**/*.feature"
-    }
+    import { validateSchema } from "./validate-schema-command";
+	
+    Cypress.Commands.add("validateSchema", validateSchema);
 ```
-4. Feature test file can be executed via Cypress Test Runner or via Commands
-5. Head to <a href="https://www.npmjs.com/package/cypress-cucumber-preprocessor</a> for more configurations
+4. Create schema file in support/schema
+5. Import schema file and call cy.validateSchema() to validate response schema
+6. Head to <a href="https://ajv.js.org/json-schema.html">AJV</a> for more configurations
+	
+### Custom response body value validation method
 
 ### Parallel run with CI provider and Cypress Dashboard
 
 <p align="center">
 Cypress Dashboard
 	<br>
-    <a alt="CypressFrameworkBDD" href="https://dashboard.cypress.io/projects/ukewho/runs">
-        <img src="https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ukewho/main&style=flat&logo=cypress">
+    <a alt="CypressFrameworkSpec" href="https://dashboard.cypress.io/projects/duny7e/runs">
+        <img src="https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/duny7e/main&style=flat&logo=cypress">
     </a>
 </p>
 		
 CI | Build status | Config File | Set up Cypress Dashboard
 :--- | :--- | :--- | :---
-CircleCI | [![CircleCI](https://circleci.com/gh/trongtuyen96/cypress-framework-bdd.svg?style=svg&circle-token=7400bd5a15daed35237400a49b510ad756a005a0)](https://app.circleci.com/pipelines/github/trongtuyen96/cypress-framework-bdd) | [config.yml](.circleci/config.yml) | Already set up with CYPRESS_RECORD_KEY as enviroment variable in CircleCI
+CircleCI | [![CircleCI](https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main.svg?style=svg)](https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main) | [config.yml](.circleci/config.yml) | Already set up with CYPRESS_RECORD_KEY as enviroment variable in CircleCI
 CircleCI - v2 Config without Orbs| Not activated | [.circleci/config-without-orbs.yml](config-without-orbs.yml) | Already set up with CYPRESS_RECORD_KEY as enviroment variable in CircleCI
-TravisCI | [![TravisCI](https://travis-ci.com/trongtuyen96/cypress-framework-bdd.svg?branch=main)](https://travis-ci.com/trongtuyen96/cypress-framework-bdd) | [.travis.yml](.travis.yml) | Comment out code lines with record on Cypress Dashboard
-GitlabCI | [![GitlabCI](https://gitlab.com/trongtuyen96/cypress-framework-bdd/badges/main/pipeline.svg)](https://gitlab.com/trongtuyen96/cypress-framework-bdd/-/pipelines) | [.gitlab-ci.yml](.gitlab-ci.yml) | Comment out code lines with record on Cypress Dashboard
-Github Actions | [![Github - Main](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/main.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/main.yml) | [main.yml](.github/workflows/main.yml) | Comment out code lines with record on Cypress Dashboard
-Github Actions - Sync Bitbucket | [![Github - Sync Bitbucket](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-bitbucket-https.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-bitbucket-https.yml) | [sync-bitbucket-https.yml](.github/workflows/sync-bitbucket-https.yml) | To sync code to Bitbucket
-Github Actions - Sync Gitlab | [![Github - Sync Gitlab](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-gitlab-https.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-gitlab-https.yml) | [sync-gitlab-https.yml](.github/workflows/sync-gitlab-https.yml) | To sync code to Gitlab
+TravisCI | [![TravisCI](https://travis-ci.com/trongtuyen96/cypress-framework-spec.svg?branch=main)](https://travis-ci.com/trongtuyen96/cypress-framework-spec) | [.travis.yml](.travis.yml) | Comment out code lines with record on Cypress Dashboard
+GitlabCI | [![GitlabCI](https://gitlab.com/trongtuyen96/cypress-framework-spec/badges/main/pipeline.svg)](https://gitlab.com/trongtuyen96/cypress-framework-spec/-/pipelines) | [.gitlab-ci.yml](.gitlab-ci.yml) | Comment out code lines with record on Cypress Dashboard
+Github Actions | [![Github - Main](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/main.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/main.yml) | [main.yml](.github/workflows/main.yml) | Comment out code lines with record on Cypress Dashboard
+Github Actions - Sync Bitbucket | [![Github - Sync Bitbucket](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-bitbucket-https.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-bitbucket-https.yml) | [sync-bitbucket-https.yml](.github/workflows/sync-bitbucket-https.yml) | To sync code to Bitbucket
+Github Actions - Sync Gitlab | [![Github - Sync Gitlab](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-gitlab-https.yml/badge.svg)](https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-gitlab-https.yml) | [sync-gitlab-https.yml](.github/workflows/sync-gitlab-https.yml) | To sync code to Gitlab
 	
 ## Author
 	
