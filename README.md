@@ -7,26 +7,26 @@
 <h3 align="center" style="bold">An automation testing framework based on Cypress for REST API and WebUI testing using Page Object Model, Mocha, Lighthouse and CI intergrated with Github Actions, CircleCI, GitlabCI and Bitbucket Pipelines. Running with spec file. No BDD.</h3>
 
 <p align="center">
-  <a alt="CircleCI" href="https://app.circleci.com/pipelines/github/trongtuyen96/cypress-framework-bdd">
-    <img src="https://circleci.com/gh/trongtuyen96/cypress-framework-bdd.svg?style=svg&circle-token=7400bd5a15daed35237400a49b510ad756a005a0">
+  <a alt="CircleCI" href="https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main">
+    <img src="https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main.svg?style=svg">
   </a>
-  <a alt="TravisCI" href="https://travis-ci.com/trongtuyen96/cypress-framework-bdd">
-    <img src="https://travis-ci.com/trongtuyen96/cypress-framework-bdd.svg?branch=main">
+  <a alt="TravisCI" href="https://travis-ci.com/trongtuyen96/cypress-framework-spec">
+    <img src="https://travis-ci.com/trongtuyen96/cypress-framework-spec.svg?branch=main">
   </a>
-  <a alt="GitlabCI" href="https://gitlab.com/trongtuyen96/cypress-framework-bdd/-/pipelines">
-    <img src="https://gitlab.com/trongtuyen96/cypress-framework-bdd/badges/main/pipeline.svg">
+  <a alt="GitlabCI" href="https://gitlab.com/trongtuyen96/cypress-framework-spec/-/pipelines">
+    <img src="https://gitlab.com/trongtuyen96/cypress-framework-spec/badges/main/pipeline.svg">
   </a>
-  <a alt="CypressFrameworkBDD" href="https://dashboard.cypress.io/projects/ukewho/runs">
-    <img src="https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ukewho/main&style=flat&logo=cypress">
+  <a alt="CypressFrameworkSpec" href="https://dashboard.cypress.io/projects/duny7e/runs">
+    <img src="https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/duny7e/main&style=flat&logo=cypress">
   </a>
-  <a alt="GitHub Actions - Main" href="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/main.yml">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/main.yml/badge.svg">
+  <a alt="GitHub Actions - Main" href="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/main.yml">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/main.yml/badge.svg">
   </a>
-  <a alt="GitHub Actions - Sync Bitbucket" href="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-bitbucket-https.yml">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-bitbucket-https.yml/badge.svg">
+  <a alt="GitHub Actions - Sync Bitbucket" href="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-bitbucket-https.yml">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-bitbucket-https.yml/badge.svg">
   </a>
-  <a alt="GituUb Actions - Sync Gitlab" href="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-gitlab-https.yml">
-    <img src="https://github.com/trongtuyen96/cypress-framework-bdd/actions/workflows/sync-gitlab-https.yml/badge.svg">
+  <a alt="GituUb Actions - Sync Gitlab" href="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-gitlab-https.yml">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/actions/workflows/sync-gitlab-https.yml/badge.svg">
   </a>
 </p>
 
