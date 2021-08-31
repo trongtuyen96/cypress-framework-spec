@@ -127,9 +127,9 @@ More details: https://docs.cypress.io/guides/guides/command-line
 
 ## Write test
 
-#### Write UI Test Case
+### Write UI Test Case
 
-###### Add page file with locators and methods
+#### Add page file with locators and methods
 
 - Head to cypress/support/pages and create new .page.js file
 - List all locators of elements in the page
@@ -137,10 +137,10 @@ More details: https://docs.cypress.io/guides/guides/command-line
 - Export the page object
 	
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_1.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_1.png" width="650px">
 </p>
 	
-###### Add new test spec file and write test
+#### Add new test spec file and write test
 	
 - Head to cypress/integration/atwt-ui and create new .spec.js file
 - Import the created page object that including the functions/validators you want to use
@@ -150,12 +150,12 @@ More details: https://docs.cypress.io/guides/guides/command-line
 - Initialize page object and call methods/validators for testing purpose
 	
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_2.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_2.png" width="650px">
 </p>
 
-#### Write API Test Case
+### Write API Test Case
 
-###### Add new test spec file and write test
+#### Add new test spec file and write test
 
 - Head to cypress/integration/atwt-api and create new .spec.js file
 - Import the api-action
@@ -165,10 +165,10 @@ More details: https://docs.cypress.io/guides/guides/command-line
 - Some bilt-in functions: makeRequest(), validateResponseKeyValue(), getResponseBodyValue(), setHeader(), ...
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_3.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_3.png" width="650px">
 </p>
 
-###### Validate resposne schema
+#### Validate resposne schema
 
 - Create new schema file inside support/schema as following
 
@@ -179,14 +179,14 @@ More details: https://docs.cypress.io/guides/guides/command-line
 - Import the schema configuration in your test spec.js file
 - Call cy.validateSchema(<your schema>, apiAction.getResponseBody()) to validate schema of response 
 
-###### Store run-time parameters
+#### Store run-time parameters
 
 - Store the run-time parameter by adding key and value: cy.addRuntimeVariable(<key name>, <value>)
 - Get the stored parameter by cy.getRuntimeVariable(<key name>)
 - Remmeber to .then() since Cypress command is asynchonous
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_5.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/write_test_5.png" width="650px">
 </p>
 	
 ## Set Up
@@ -215,7 +215,7 @@ More details: https://docs.cypress.io/guides/guides/command-line
         - "timestamp" to append timestamp to report name, prevent replacement
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/reports.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/reports.png" width="650px">
 </p>
 	
 4. After executions, reports are located in cypress/reports
@@ -281,7 +281,7 @@ More details: https://docs.cypress.io/guides/guides/command-line
 4. Use cy.lighthouse() or cy.pa11y() to run performance testing
 
 <p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/performance.png" width="500px">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/9ecb4ea0c124ab010b687d8a4c6cbb1bdec6caff/covers/performance.png" width="650px">
 </p>
 
 5. After executions, reports are located in cypress/reports
