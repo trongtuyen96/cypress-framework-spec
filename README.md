@@ -320,6 +320,17 @@ More details: https://docs.cypress.io/guides/guides/command-line
 	
 ### Custom response body value validation method
 
+I have created a custom method inside support/api.action.js to validate response value by providing key.
+
+<p align="center">
+    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/83c11f3227f620f03b2b9b5f55adf8271e0f789d/covers/custom_validation.png" width="650px">
+</p>
+	
+There are many type of jsonkey that you can use:
+- N-th object of the respose: [n]. For example: [0] , [1], ..
+- Key of N-th object: [n].<key>. For example: [0].name to get value of key name of first object
+- More complex one can be: bills[0].items[1].price to get Price of first Item of first Bill
+
 ### Parallel run with CI provider and Cypress Dashboard
 
 <p align="center">
