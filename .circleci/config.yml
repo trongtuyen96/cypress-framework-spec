@@ -45,7 +45,7 @@ workflows:
             - store_artifacts:
                 path: cypress/screenshots
             
-       # run API Test
+      # run API Test
       - cypress/run:
           filters:
             branches:

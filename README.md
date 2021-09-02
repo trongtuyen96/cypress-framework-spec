@@ -261,7 +261,7 @@ More details: https://docs.cypress.io/guides/guides/command-line
 
 8. To update snapshots when there are changes where expected
 ```bash
-    npx cypress run --env updateSnapshots=true --spec cypress/integration/webtest/Login.feature --browser chrome
+    npx cypress run --env updateSnapshots=true --spec cypress/integration/atwt-ui/ui-regression.spec.js --browser chrome
 ```
 
 9. Head to <a href="https://www.npmjs.com/package/cypress-plugin-snapshots">cypress-plugin-snapshots</a> for more configurations
