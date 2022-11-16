@@ -81,7 +81,7 @@
 
 :gear: Parallel runs with Cypress Dashboard
 
-:gear: And other functions inherited from Cypress
+:gear: And other functions inherited from cypress
 
 
 ## Installation
