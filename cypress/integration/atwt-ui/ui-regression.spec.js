@@ -4,7 +4,7 @@ describe('UI Regression test', () => {
         cy.xpath('//div[@data-testid="container-bg"]').toMatchSnapshot();
     })
 
-    it('Compare banner image of post "Overriding vs Overloading"', () => {
+    it.skip('Compare banner image of post "Overriding vs Overloading"', () => {
         cy.visit('post/overriding-vs-overloading');
         cy.xpath('//img[contains(@style,"object-position: 50% 50%")]').toMatchSnapshot();
     })
