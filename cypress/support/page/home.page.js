@@ -14,7 +14,7 @@ class HomePage {
     POST_TITLE_LINK = '//div[contains(@class,"search-result")]//h2[contains(@class,"post-title blog-hover")]';
     BANNER_BG = '//div[@data-testid="container-bg"]';
     USER_NAME = '//button[contains(@aria-label,"account menu")]/div[position()=2]';
-    POST_IMAGE_LOADED = '(//div[contains(@style,"file.webp")])[1]';
+    POST_IMAGE_LOADED = '(//div[contains(@class,"gallery-item-wrapper")])[1]';
 
     navigateHome() {
         cy.visit("/");
@@ -23,6 +23,10 @@ class HomePage {
 
         // Special case: Wait for page fully loaded and rendered
         cy.xpath(this.POST_IMAGE_LOADED, { timeout: 30000 });
+
+        // To avoid logic did not load in time
+        cy.wait(10000);
+
         return this;
     }
 

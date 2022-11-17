@@ -28,7 +28,7 @@ describe('Search feature test', () => {
         })
     })
 
-    context('Search for Interface vs Abstract', () => {
+    context.skip('Search for Interface vs Abstract', () => {
         let keyword = "Interface vs Abstract";
         it('Navigate to ATWT website and wait for page load', () => {
             homePage.navigateHome();
