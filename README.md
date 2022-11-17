@@ -10,7 +10,7 @@
   <a alt="CircleCI" href="https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main">
     <img src="https://circleci.com/gh/trongtuyen96/cypress-framework-spec/tree/main.svg?style=svg">
   </a>
-  <a alt="TravisCI" href="https://travis-ci.com/trongtuyen96/cypress-framework-spec">
+  <a alt="TravisCI" href="https://app.travis-ci.com/github/trongtuyen96/cypress-framework-spec">
     <img src="https://travis-ci.com/trongtuyen96/cypress-framework-spec.svg?branch=main">
   </a>
   <a alt="GitlabCI" href="https://gitlab.com/trongtuyen96/cypress-framework-spec/-/pipelines">
@@ -38,14 +38,7 @@
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Write Test](#write-test)
-    - [Write UI Test Case](#write-ui-test-case)
-    - [Write API Test Case](#write-api-test-case)
 - [Set Up](#set-up)
-    - [Multiple reports option](#multiple-reports-option)
-    - [Visual regression testing](#visual-regression-testing)
-    - [Performance Testing with Google Lighthouse and Pa11y](#performance-testing-with-google-lighthouse-and-pa11y)
-    - [Schema Validator with ajv](#schema-validator-with-ajv)
-    - [Custom response body value validation method](#custom-response-body-value-validation-method)
 - [Author](#author)
 - [License](#license)
 
@@ -326,17 +319,6 @@ More details: https://docs.cypress.io/guides/guides/command-line
 6. Head to <a href="https://ajv.js.org/json-schema.html">AJV</a> for more configurations
 	
 ### Custom response body value validation method
-
-I have created a custom method inside support/api.action.js to validate response value by providing key.
-
-<p align="center">
-    <img src="https://github.com/trongtuyen96/cypress-framework-spec/blob/83c11f3227f620f03b2b9b5f55adf8271e0f789d/covers/custom_validation.png" width="650px">
-</p>
-	
-There are many type of jsonkey that you can use:
-- N-th object of the respose: [n]. For example: [0] , [1], ..
-- Key of N-th object: [n].key. For example: [0].name to get value of key name of first object
-- More complex one can be: bills[0].items[1].price to get Price of first Item of first Bill
 
 ### Parallel run with CI provider and Cypress Dashboard
 
