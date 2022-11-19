@@ -26,6 +26,7 @@ jobs:
           # record: true
           # parallel: true
           # group: API-Test
+          install-command: npm install --force
           spec:
             cypress/integration/atwt-api/*.spec.js
         env:
